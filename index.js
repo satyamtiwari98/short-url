@@ -4,6 +4,9 @@ const { connectToMongoDB } = require("./connect.mongoose");
 const URL = require("./models/url.models");
 const path = require("path");
 const staticRoute = require("./routes/staticRouter");
+const userRoute = require("./routes/user.routes");
+const cookieParser = require("cookie-parser");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 
 const server = express();
 const PORT = 3001;
@@ -17,6 +20,7 @@ server.set("views", path.resolve("./views"));
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
+server.use(cookieParser());
 
 // EJS
 // server.get("/test", async (req, res) => {
@@ -26,8 +30,9 @@ server.use(express.urlencoded({ extended: false }));
 //   });
 // });
 
-server.use("/", staticRoute);
-server.use("/url", urlRoute);
+server.use("/", checkAuth, staticRoute);
+server.use("/url", restrictToLoggedinUserOnly, urlRoute);
+server.use("/user", userRoute);
 // server.get("/", (req, res) => {
 //   res.send("Hi Welcome to our server.");
 // });
