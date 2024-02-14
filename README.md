@@ -25,19 +25,21 @@ This is a simple URL shortening service built with the MERN (MongoDB, Express.js
 
 ```bash
 git clone https://github.com/satyamtiwari98/short-url.git
-'''
+```
 
 2.Navigate to the project directory:
-'''bash
+```bash
   cd short-url
-'''
+```
+
 3.Install dependencies:
-'''bash
+```bash
   npm install
-'''
+```
+
 4. Run the application:
 
-'''bash  npm start '''
+```bash  npm start ```
 
 ## Usage
 
